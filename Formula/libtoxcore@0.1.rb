@@ -37,9 +37,12 @@ class LibtoxcoreAT01 < Formula
 
     ENV["LDFLAGS"] = "-mmacosx-version-min=10.6"
     ENV["CFLAGS"] = "-mmacosx-version-min=10.6"
-    system "cmake", ".", *args, *std_cmake_args
-    system "make"
-    system "make", "install"
+    system "mkdir _build"
+    chdir "_build" do
+      system "cmake", *args, *std_cmake_args, ".."
+      system "make"
+      system "make", "install"
+    end
   end
 
   test do
